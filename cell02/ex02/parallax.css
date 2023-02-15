@@ -1,0 +1,38 @@
+.div1,
+.div2,
+.div3 {
+  position: relative;
+}
+
+.div2 {
+  background-color: black;
+  height: 500px;
+  width: 100%;
+}
+
+img {
+  width: 100%;
+}
+
+h1,
+h3 {
+  color: #fff;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center-bottom {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
+
+<style>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <form>
+      <div style="margin-top: 20px;">
+        <label for="leftnum">Left Number</label> <br />
+        <input type="text" name="leftnum" id="leftnum" style="width: 350px" onchange="handleChange(this)" />
+        <br />
+      </div>
+
+      <div style="margin-top: 20px;">
+        <label for="operators">Operators:</label>
+        <select id="operators" name="operators" style="width: 250px" onchange="handleChange()">
+          <option value="+">+</option>
+          <option value="-">-</option>
+          <option value="*">*</option>
+          <option value="/">/</option>
+          <option value="%">%</option>
+        </select>
+        <br />
+      </div>
+
+      <div style="margin-top: 20px;">
+        <label for="rightnum">Right Number</label> <br />
+        <input type="text" name="rightnum" id="rightnum" style="width: 350px" onchange="handleChange()" />
+        <br />
+      </div>
+
+      <div style="margin-top: 20px;">
+        <input type="submit" value="Try me!" style="width: 350px" onclick="calculate()" />
+      </div>
+    </form>
+
+    <h2 id="result" style="margin-left: 100px;">
+      Result: Please Press "Try me!"
+    </h2>
+  </div>
+</body>
+
+<script>
+  let result = 0;
+  let idleTime = 0;
+  let inputValue = {
+    rightnum: 0,
+    leftnum: 0,
+    operators: "+"
+  };
+
+  function handleChange() {
+    inputValue[event.target.name] = event.target.value;
+  }
+
+  function calculate() {
+    event.preventDefault();
+
+    inputValue.leftnum = Number(inputValue.leftnum);
+    inputValue.rightnum = Number(inputValue.rightnum);
+
+    if (inputValue.operators === "/" || inputValue.operators === "%") {
+      if (inputValue.rightnum === 0) {
+        alert("It’s over 9000!");
+        console.log("It’s over 9000!");
+        return;
+      }
+    }
+
+    if (inputValue.rightnum < 0 || inputValue.leftnum < 0) {
+      alert("Error :(");
+      console.log("Error :(");
+      return;
+    } else if (
+      !Number.isInteger(inputValue.leftnum) ||
+      !Number.isInteger(inputValue.rightnum)
+    ) {
+      alert("Error :(");
+      console.log("Error :(");
+      return;
+    }
+
+    switch (inputValue.operators) {
+      case "+":
+        result = inputValue.leftnum + inputValue.rightnum;
+        break;
+      case "-":
+        result = inputValue.leftnum - inputValue.rightnum;
+        break;
+      case "*":
+        result = inputValue.leftnum * inputValue.rightnum;
+        break;
+      case "/":
+        result = inputValue.leftnum / inputValue.rightnum;
+        break;
+      case "%":
+        result = inputValue.leftnum % inputValue.rightnum;
+        break;
+    }
+
+    document.getElementById("result").innerHTML = `Result: ${result}`;
+    console.log(result)
+  }
+
+  var x = setInterval(() => {
+    idleTime += 1000;
+    if (idleTime === 30000) {
+      idleTime = 0;
+      alert("Please, Use me...");
+    }
+  }, 1000);
+</script>
+
+</html>

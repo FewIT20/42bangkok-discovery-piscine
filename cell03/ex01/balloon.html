@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .balloon {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      border-radius: 100px;
+      margin: 300px;
+    }
+  </style>
+
+  <body>
+    <div class="container">
+      <div
+        class="balloon"
+        id="balloonElm"
+        onclick="handleBalloonClick()"
+        onmouseout="handleOnMouseOut()"
+      ></div>
+    </div>
+  </body>
+
+  <script>
+    const balloonElm = document.getElementsByClassName("balloon");
+
+    const colors = ["red", "green", "blue"];
+    let currentColorIdx = 0;
+    let width = 200;
+    let height = 200;
+
+    function handleBalloonClick() {
+      width += 10;
+      height += 10;
+      if (currentColorIdx == 2) {
+        balloonElm[0].style.backgroundColor = colors[0];
+        currentColorIdx = 0;
+      } else {
+        currentColorIdx++;
+        balloonElm[0].style.backgroundColor = colors[currentColorIdx];
+      }
+
+      if (width > 420 && height > 420) {
+        width = 200;
+        height = 200;
+        balloonElm[0].style.width = "200px";
+        balloonElm[0].style.height = "200px";
+      } else {
+        balloonElm[0].style.width = `${width}px`;
+        balloonElm[0].style.height = `${height}px`;
+      }
+    }
+
+    function handleOnMouseOut() {
+      width -= 5;
+      height -= 5;
+      if (width > 200 && height > 200) {
+        balloonElm[0].style.width = `${width}px`;
+        balloonElm[0].style.height = `${height}px`;
+      }
+    }
+  </script>
+</html>
